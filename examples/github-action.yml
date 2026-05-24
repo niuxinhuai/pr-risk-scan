@@ -1,0 +1,20 @@
+name: PR Risk Scan
+
+on:
+  pull_request:
+
+jobs:
+  risk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npx pr-risk-scan --base origin/main --fail-on high --markdown pr-risk.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr-risk-report
+          path: pr-risk.md

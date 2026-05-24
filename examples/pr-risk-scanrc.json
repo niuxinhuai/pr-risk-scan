@@ -1,0 +1,25 @@
+{
+  "base": "main",
+  "failOn": "high",
+  "ignore": [
+    "docs/**",
+    "**/*.md"
+  ],
+  "ownerRules": [
+    {
+      "path": "src/auth/**",
+      "owner": "security",
+      "severity": "high",
+      "score": 6
+    }
+  ],
+  "rules": [
+    {
+      "category": "billing",
+      "severity": "high",
+      "score": 6,
+      "pattern": "billing|payment|invoice",
+      "reason": "Billing or payment path changed."
+    }
+  ]
+}
