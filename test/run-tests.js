@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const cli = path.join(root, 'src', 'cli.js');
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pr-risk-scan-'));
+function git(args) { return execFileSync('git', args, { cwd: tmp, encoding: 'utf8' }); }
+git(['init', '-b', 'main']);
+git(['config', 'user.email', 'test@example.com']);
+git(['config', 'user.name', 'Test User']);
+fs.mkdirSync(path.join(tmp, 'src'), { recursive: true });
+fs.writeFileSync(path.join(tmp, 'src/auth.js'), 'export const ok = true;\n');
+git(['add', '.']);
+git(['commit', '-m', 'initial']);
+fs.writeFileSync(path.join(tmp, 'src/auth.js'), 'export const token = true;\n');
+const out = execFileSync(process.execPath, [cli], { cwd: tmp, encoding: 'utf8' });
+assert.match(out, /security/);
+const json = JSON.parse(execFileSync(process.execPath, [cli, '--json'], { cwd: tmp, encoding: 'utf8' }));
+assert.equal(json.level !== 'low', true);
+console.log('pr-risk-scan tests passed');

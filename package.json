@@ -1,0 +1,36 @@
+{
+  "name": "pr-risk-scan",
+  "version": "0.1.0",
+  "description": "Scan a git diff for release, security, schema, config, and test-risk signals before opening a PR.",
+  "type": "module",
+  "bin": {
+    "pr-risk-scan": "./src/cli.js"
+  },
+  "scripts": {
+    "test": "node test/run-tests.js"
+  },
+  "keywords": [
+    "cli",
+    "developer-tools",
+    "open-source",
+    "ai-workflow"
+  ],
+  "author": "niuxinhuai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niuxinhuai/pr-risk-scan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niuxinhuai/pr-risk-scan/issues"
+  },
+  "homepage": "https://github.com/niuxinhuai/pr-risk-scan#readme",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
