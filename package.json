@@ -7,7 +7,8 @@
     "pr-risk-scan": "./src/cli.js"
   },
   "scripts": {
-    "test": "node test/run-tests.js"
+    "test": "node test/run-tests.js",
+    "smoke": "pr-risk-scan --help"
   },
   "keywords": [
     "cli",
@@ -27,6 +28,7 @@
   "homepage": "https://github.com/niuxinhuai/pr-risk-scan#readme",
   "files": [
     "src",
+    "examples",
     "README.md",
     "LICENSE"
   ],
